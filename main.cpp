@@ -155,11 +155,11 @@ void right(){
                 left();
                 encoder0.reset(); 
                 queue1.call(goStraight);
-                while(encoder0.get_cm()<85) wait_ms(50);
+                while(encoder0.get_cm()<75) wait_ms(50);
                 //car.stop();
                 //wait(3);
             }
-            else if((float)ping1 < 10 && wall == 1){
+            else if((float)ping1 < 3 && wall == 1){
                 wall = 2;
                 led1 = 0;
                 status=3;
@@ -180,24 +180,24 @@ void right(){
                 }
                 status = 4;
                 wait(1);
-                right();
-                car.goStraightCalib(20);
-                wait(3);
+                left();
+                car.goStraightCalib(-20);
+                wait(4);
                 car.stop();
                 wait(1);
                 car.stop();
-                left();
+                right();
                 car.goStraightCalib(-20);
-                wait(1.5);
+                wait(2);
                 car.stop();
                 wait(2);
                 status=5;
                 car.goStraightCalib(20);
-                wait(1.5);
+                wait(2);
                 right();
                 wait(1);
                 car.goStraightCalib(20);
-                wait(1);
+                wait(2);
                 car.stop();
                 right();
                 car.goStraightCalib(20);
@@ -213,7 +213,9 @@ void right(){
               car.stop();
               right();
               car.goStraightCalib(20);
+              wait(10);
               status=6;
+              car.stop();
               break;
             }
          }

@@ -168,4 +168,4 @@ while True:
     print(line3)
     mesg = line3
     mqttc.publish(topic, mesg)
-    time.sleep(0.1)
+    time.sleep(1)
