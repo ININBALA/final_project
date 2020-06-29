@@ -75,7 +75,7 @@ frq = k/T # a vector of frequencies; two sides frequency range
 
 frq = frq[range(int(n/2))] # one side frequency range
 
-serdev = '/dev/ttyUSB1'
+serdev = '/dev/ttyUSB0'
 
 s = serial.Serial(serdev, 9600)
 

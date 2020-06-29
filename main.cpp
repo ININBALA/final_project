@@ -167,34 +167,26 @@ void right(){
                 char s[21];
                 sprintf(s,"image_classification");
                 uart.puts(s);
-                int flag = 1;
-                while(flag){
+                int i = 0;
+                while(i < 5000){
                   if(uart.readable()){
                     char recv = uart.getc();
                     image = recv;
                     pc.putc(recv);
                     pc.printf("\r\n");
-                    flag = 0;
                   }
+                  i++;
+                  wait_ms(1);
                 }
                 status = 4;
                 wait(1);
-                encoder0.reset();
-                car.turnCalibRight(30, -30);
-                while(encoder0.get_cm()<6) wait_ms(50);
-                car.stop();
-                wait(1);
+                right();
                 car.goStraightCalib(20);
                 wait(3);
                 car.stop();
                 wait(1);
                 car.stop();
-                encoder0.reset();
-                car.turnCalibLeft(30, -30);
-                while(encoder0.get_cm()<5) wait_ms(5);
-                //wait(0.7);
-                car.stop();
-                wait(1);
+                left();
                 car.goStraightCalib(-20);
                 wait(1.5);
                 car.stop();
@@ -202,19 +194,12 @@ void right(){
                 status=5;
                 car.goStraightCalib(20);
                 wait(1.5);
-                encoder0.reset(); 
-                car.turnCalibRight(30, -30);
-                while(encoder0.get_cm()<6) wait_ms(50);
-                car.stop();
+                right();
                 wait(1);
                 car.goStraightCalib(20);
                 wait(1);
                 car.stop();
-                encoder0.reset(); 
-                car.turnCalibRight(30, -30);
-                while(encoder0.get_cm()<6) wait_ms(50);
-                car.stop();
-                wait(1);
+                right();
                 car.goStraightCalib(20);
                 wall = 2;
             }
@@ -228,7 +213,7 @@ void right(){
               car.stop();
               right();
               car.goStraightCalib(20);
-              status=7;
+              status=6;
               break;
             }
          }
@@ -346,7 +331,7 @@ void getAction() {
         xbee.printf("number is %c\n", image);
       case 5:
         xbee.printf("leave mission1\n");
-      case 7:
+      case 6:
         xbee.printf("leave maze\n");
       default:
         break;
